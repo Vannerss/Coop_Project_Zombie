@@ -9,6 +9,8 @@ public class InputManager : MonoBehaviour
 
     private PlayerControls playerControls;
 
+    [SerializeField] Gun gun;
+
     public static InputManager Instance 
     {
         get 
@@ -30,6 +32,9 @@ public class InputManager : MonoBehaviour
         }
         playerControls = new PlayerControls();
         Cursor.visible = false;
+
+       //playerControls.Shoot.performed += _ => gun.Shoot();
+       playerControls.Player.Shoot.performed += _ => gun.Shoot();
     }
 
     private void OnEnable()

@@ -9,7 +9,7 @@ public class PlayerHealth : MonoBehaviour
     private float MaxHealth = 100f;
     private float CurrentHealth;
     private int Heal = 5;
-    private GameObject GameOver;
+    public GameObject GameOver;
     [SerializeField]
     private Image HealthSlider;
 
@@ -19,14 +19,33 @@ public class PlayerHealth : MonoBehaviour
         CurrentHealth = MaxHealth;
     }
 
+    private void Update()
+    {
+        HealPlayer();
+        UpdateHealthSlider();
+    }
+
     
-   
+
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Enemy") 
         {
             DamagePlayer(20);
+        }
+    }
+
+    private void UpdateHealthSlider() 
+    {
+        if (CurrentHealth <= 0)
+        {
+            
+            HealthSlider.fillAmount = CurrentHealth;
+        }
+        else
+        {
+            HealthSlider.fillAmount = CurrentHealth / MaxHealth;
         }
     }
 
@@ -39,23 +58,36 @@ public class PlayerHealth : MonoBehaviour
         if (CurrentHealth <= 0)
         {
             CurrentHealth = 0;
-            HealthSlider.fillAmount = CurrentHealth;
+            Died();
 
         }
-        else 
-        {
-            HealthSlider.fillAmount = CurrentHealth / MaxHealth;
-        }
+       
         Debug.Log(CurrentHealth);
     }
 
 
     private void HealPlayer() 
     {
-        if (CurrentHealth > 100) 
+       
+        if (CurrentHealth < MaxHealth) 
         {
-            CurrentHealth = MaxHealth;
-           
+            CurrentHealth += .5f * Time.deltaTime;
+            if (CurrentHealth > MaxHealth) CurrentHealth = MaxHealth;
         }
+            
+
+        
     }
+
+    
+    private void Died()
+    {
+        
+      Time.timeScale = 0;
+      GameOver.SetActive(true);
+      Cursor.lockState = CursorLockMode.Confined;
+        
+        
+    }
+
 }
