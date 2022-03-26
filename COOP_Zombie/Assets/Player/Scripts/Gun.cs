@@ -6,6 +6,7 @@ public class Gun : MonoBehaviour
 {
     Transform cam;
 
+
    [SerializeField] public float damage = 10f;
    [SerializeField] public float range = 100f;
     
@@ -16,14 +17,12 @@ public class Gun : MonoBehaviour
         cam = Camera.main.transform;
     }
 
-    public void Shoot() 
+    public void Shoot()
     {
         RaycastHit hit;
-        if (Physics.Raycast(cam.position, cam.forward, out hit, range)) 
+        if (Physics.Raycast(cam.position, cam.forward, out hit, range))
         {
             print(hit.collider.name);
         }
     }
-    // Update is called once per frame
-
 }

@@ -32,9 +32,9 @@ public class InputManager : MonoBehaviour
         }
         playerControls = new PlayerControls();
         Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
 
-       //playerControls.Shoot.performed += _ => gun.Shoot();
-       playerControls.Player.Shoot.performed += _ => gun.Shoot();
+        playerControls.Player.Shoot.performed += _ => gun.Shoot();
     }
 
     private void OnEnable()
