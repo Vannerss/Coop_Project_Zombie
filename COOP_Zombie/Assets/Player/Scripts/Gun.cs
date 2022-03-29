@@ -6,15 +6,23 @@ public class Gun : MonoBehaviour
 {
     Transform cam;
 
+    private InputManager inputManager;
 
-   [SerializeField] public float damage = 10f;
-   [SerializeField] public float range = 100f;
-    
+   [SerializeField] private float damage = 10f;
+   [SerializeField] private float range = 100f;
 
-
-    private void Awake()
+    private void Start()
     {
+        inputManager = InputManager.Instance; 
         cam = Camera.main.transform;
+    }
+
+    private void Update()
+    {
+        if (inputManager.PlayerOnClick())
+        {
+            Shoot();
+        }
     }
 
     public void Shoot()

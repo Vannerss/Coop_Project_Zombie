@@ -6,10 +6,7 @@ public class InputManager : MonoBehaviour
 {
 
     private static InputManager _instance;
-
     private PlayerControls playerControls;
-
-    [SerializeField] Gun gun;
 
     public static InputManager Instance 
     {
@@ -19,7 +16,6 @@ public class InputManager : MonoBehaviour
         }
     }
     
-
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -30,11 +26,11 @@ public class InputManager : MonoBehaviour
         {
             _instance = this;
         }
-        playerControls = new PlayerControls();
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+        playerControls = new PlayerControls();
 
-        playerControls.Player.Shoot.performed += _ => gun.Shoot();
+        //playerControls.Player.Shoot.performed += _ => gun.Shoot(); //removed this subscription cause it destroyed the purpose of a singleton.
     }
 
     private void OnEnable()
@@ -60,5 +56,10 @@ public class InputManager : MonoBehaviour
     public bool PlayerJumped() 
     {
         return playerControls.Player.Jump.triggered;
+    }
+
+    public bool PlayerOnClick()
+    {
+        return playerControls.Player.Shoot.triggered;
     }
 }
