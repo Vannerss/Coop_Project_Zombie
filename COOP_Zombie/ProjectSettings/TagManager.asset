@@ -3,20 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-<<<<<<< Updated upstream
-  - Enemy
-=======
-  - Weapon
-  - SecondCamera
-  - BulletSpawn
-  - LevelPart
-  - Dummie
-  - PlayerOne
-  - PlayerTwo
-  - PlayerThree
-  - PlayerFour
->>>>>>> Stashed changes
+  tags: []
   layers:
   - Default
   - TransparentFX
