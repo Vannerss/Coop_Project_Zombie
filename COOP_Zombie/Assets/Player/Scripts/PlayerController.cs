@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
         [SerializeField]
         private float gravityValue = -9.81f;
 
+        public Animator anim;
         private CharacterController controller;
         private Vector3 playerVelocity;
         private bool groundedPlayer;
@@ -54,6 +55,18 @@ public class PlayerController : MonoBehaviour
 
             playerVelocity.y += gravityValue * Time.deltaTime;
             controller.Move(playerVelocity * Time.deltaTime);
+           Animate();
         }
+    void Animate() 
+    {
+        if (inputManager.GetPlayerMovement() != Vector2.zero) 
+        {
+            anim.SetFloat("Horizontal", inputManager.GetPlayerMovement().x);
+
+            anim.SetFloat("Vertical", inputManager.GetPlayerMovement().y);
+        }
+        
+        anim.SetFloat("Speed", inputManager.GetPlayerMovement().sqrMagnitude);
+    }
     
 }
