@@ -123,6 +123,50 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &106610594
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 106610596}
+  - component: {fileID: 106610595}
+  m_Layer: 0
+  m_Name: SessionManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &106610595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 106610594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31208c9f2cfe40f40b6f6b67a6ecab5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &106610596
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 106610594}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 917.32294, y: 807.29675, z: -16.036217}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &402085647
 GameObject:
   m_ObjectHideFlags: 0
@@ -697,7 +741,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 663968837}
   m_LocalRotation: {x: 0.13052616, y: 0, z: 0, w: 0.9914449}
-  m_LocalPosition: {x: 2.0467987, y: 4.9999995, z: -31.574322}
+  m_LocalPosition: {x: 2.0467987, y: 5.23, z: -19.95}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -794,7 +838,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 728634074}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2, y: -4.1, z: -9.6}
+  m_LocalPosition: {x: 2, y: -2.43, z: 0.53}
   m_LocalScale: {x: 25, y: 1, z: 25}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1274,8 +1318,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 500.5, y: 395.5}
-  m_SizeDelta: {x: -1083.3855, y: -856}
+  m_AnchoredPosition: {x: 651.9027, y: 460.1886}
+  m_SizeDelta: {x: -1303.8055, y: -920.3672}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1735597424
 GameObject:
@@ -1323,6 +1367,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b27ba0f48b77d7942b2c53ae10a32a78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playersInGameText: {fileID: 777873171}
 --- !u!1 &2094597840
 GameObject:
   m_ObjectHideFlags: 0

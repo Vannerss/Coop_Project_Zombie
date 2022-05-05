@@ -224,6 +224,8 @@ GameObject:
   - component: {fileID: 4894876790063599774}
   - component: {fileID: -6951090883657171812}
   - component: {fileID: 3017080716447208694}
+  - component: {fileID: 4828577872173365088}
+  - component: {fileID: 8291540425736609383}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -383,6 +385,35 @@ MonoBehaviour:
     m_InternalValue: 0
   xPosition:
     m_InternalValue: 0
+--- !u!114 &4828577872173365088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3384533832854220027}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceeae5ad979fad34fa88ae481376d903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHealth: 100
+  HealAmount: 0.5
+  GameOver: {fileID: 0}
+--- !u!114 &8291540425736609383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3384533832854220027}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c50826f107ede1843b16d93f7ba88194, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  range: 100
 --- !u!1 &5561503516680294073
 GameObject:
   m_ObjectHideFlags: 0
