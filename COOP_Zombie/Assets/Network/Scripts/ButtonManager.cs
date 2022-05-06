@@ -9,9 +9,14 @@ public class ButtonManager : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI playersInGameText;
 
+    //private NetworkVariable<> playersName = new NetworkVariable<>();
+
+    //[SerializeField]
+    // private int 
+
     private void Update()
     {
-       // playersInGameText.text = $"Players in game: {SessionManager.instance.PlayersInGame}";
+        playersInGameText.text = $"Players in game: {SessionManager.instance.PlayersInGame}";
     }
 
     public void Host()
@@ -21,6 +26,7 @@ public class ButtonManager : MonoBehaviour
 
     public void Client()
     {
+        if(SessionManager.instance.PlayersInGame < 5)
         NetworkManager.Singleton.StartClient();
     }
 }

@@ -7,13 +7,14 @@ public class Singleton<T> : NetworkBehaviour
     where T : Component
 {
    private static T _instance;
-        public static T instance
+   
+   public static T instance
     {
         get
         {
             if(_instance == null)
             {
-                var objs = FindObjectOfType(typeof(T)) as T[];
+                var objs = FindObjectsOfType(typeof(T)) as T[];
 
                 if (objs.Length > 0)
                     _instance = objs[0];
@@ -28,7 +29,7 @@ public class Singleton<T> : NetworkBehaviour
                     _instance = obj.AddComponent<T>();
                 }
             }
-            return instance;
+            return _instance;
         }
     }
 }

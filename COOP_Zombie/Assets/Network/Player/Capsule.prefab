@@ -208,6 +208,37 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &2758605587268627386
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6334821739566912566}
+  m_Layer: 0
+  m_Name: FollowMe
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6334821739566912566
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2758605587268627386}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.502, y: 0.759, z: 0.411}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7286516874921178696}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3384533832854220027
 GameObject:
   m_ObjectHideFlags: 0
@@ -226,6 +257,8 @@ GameObject:
   - component: {fileID: 3017080716447208694}
   - component: {fileID: 4828577872173365088}
   - component: {fileID: 8291540425736609383}
+  - component: {fileID: 3543221552101096351}
+  - component: {fileID: 6367459764732380950}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -241,10 +274,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3384533832854220027}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.145, y: 0, z: 0.029}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 6334821739566912566}
   - {fileID: 680224657088230459}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -341,6 +375,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c110977f69616fb4186906be51b97744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  totalplayers: 0
 --- !u!114 &-6951090883657171812
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -380,10 +415,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c970a55b127118488bc70df95a9bb25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.01
-  zPosition:
-    m_InternalValue: 0
-  xPosition:
+  speed: 0.05
+  rotationSpeed: 0.5
+  networkPositionDirection:
+    m_InternalValue: {x: 0, y: 0, z: 0}
+  networkRotationDirection:
+    m_InternalValue: {x: 0, y: 0, z: 0}
+  networkPlayerState:
     m_InternalValue: 0
 --- !u!114 &4828577872173365088
 MonoBehaviour:
@@ -414,6 +452,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   range: 100
+--- !u!143 &3543221552101096351
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3384533832854220027}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!95 &6367459764732380950
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3384533832854220027}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &5561503516680294073
 GameObject:
   m_ObjectHideFlags: 0
@@ -448,7 +524,7 @@ RectTransform:
   - {fileID: 1711207647052379022}
   - {fileID: 2698552060676514443}
   m_Father: {fileID: 7286516874921178696}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
