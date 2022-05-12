@@ -6,6 +6,8 @@ using UnityEngine;
 public class SessionManager : Singleton<SessionManager>
 {
     private NetworkVariable<int> playersInGame = new NetworkVariable<int>();
+    public static bool GameIsPaused = false;
+    public GameObject Menu;
 
     public int PlayersInGame
     {
@@ -17,6 +19,13 @@ public class SessionManager : Singleton<SessionManager>
 
     private void Start()
     {
+        if (MainMenu.HostOrClient == 0)
+            Host();
+        else if (MainMenu.HostOrClient == 1)
+            Client();
+        else
+            Debug.Log("ERROR");
+
         NetworkManager.Singleton.OnClientConnectedCallback += (id) =>
         {
             if (IsServer)
@@ -30,6 +39,18 @@ public class SessionManager : Singleton<SessionManager>
         };
     }
 
+    public void Host()
+    {
+        NetworkManager.Singleton.StartHost();
+        
+    }
+
+    public void Client()
+    {
+        if (SessionManager.instance.PlayersInGame < 5)
+            NetworkManager.Singleton.StartClient();
+       
+    }
     #region Functions
     private void AddClient(ulong id)
     {

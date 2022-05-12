@@ -259,6 +259,7 @@ GameObject:
   - component: {fileID: 8291540425736609383}
   - component: {fileID: 3543221552101096351}
   - component: {fileID: 6367459764732380950}
+  - component: {fileID: 767494401184690771}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -490,6 +491,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &767494401184690771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3384533832854220027}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34ec4fbd7011ebe44b24508ea5ce8f48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerSpeed: 2
+  jumpHeight: 1
+  gravityValue: -9.81
+  anim: {fileID: 0}
 --- !u!1 &5561503516680294073
 GameObject:
   m_ObjectHideFlags: 0
