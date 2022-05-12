@@ -24,7 +24,7 @@ public class PlayerControllerNet : NetworkBehaviour
     private NetworkVariable<Vector3> networkPositionDirection = new NetworkVariable<Vector3>();
 
     [SerializeField]
-    private NetworkVariable<Vector3> networkRotationDirection = new NetworkVariable<Vector3>();
+    private NetworkVariable<Vector3> networkRotationDirection = new NetworkVariable<Vector3>(); // esta
 
     [SerializeField]
     private NetworkVariable<PlayerState> networkPlayerState = new NetworkVariable<PlayerState>();
@@ -88,8 +88,8 @@ public class PlayerControllerNet : NetworkBehaviour
         if (networkPositionDirection.Value != Vector3.zero)
             controller.Move(networkPositionDirection.Value);
 
-        if (networkRotationDirection.Value != Vector3.zero)
-            transform.Rotate(networkRotationDirection.Value);
+        if (networkRotationDirection.Value != Vector3.zero)// esta
+            transform.Rotate(networkRotationDirection.Value);// esta
     }
 
     private void ClientVisuals()
