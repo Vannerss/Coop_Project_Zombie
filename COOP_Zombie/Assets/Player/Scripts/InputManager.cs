@@ -62,4 +62,6 @@ public class InputManager : MonoBehaviour
     {
         return playerControls.Player.Shoot.triggered;
     }
+
+   
 }
