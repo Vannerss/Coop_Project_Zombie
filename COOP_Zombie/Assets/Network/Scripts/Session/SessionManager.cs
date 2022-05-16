@@ -19,9 +19,9 @@ public class SessionManager : Singleton<SessionManager>
 
     private void Start()
     {
-        if (MainMenu.HostOrClient == 0)
+        if (MainMenu.Hostbool == true)
             Host();
-        else if (MainMenu.HostOrClient == 1)
+        else if (MainMenu.Clientbool == true)
             Client();
         else
             Debug.Log("ERROR");
@@ -45,11 +45,13 @@ public class SessionManager : Singleton<SessionManager>
         
     }
 
-    public void Client()
+    public static void Client()
     {
         if (SessionManager.instance.PlayersInGame < 5)
+        {
+            Debug.Log("Client");
             NetworkManager.Singleton.StartClient();
-       
+        }
     }
     #region Functions
     private void AddClient(ulong id)

@@ -8,11 +8,14 @@ public class MainMenu : MonoBehaviour
 {
 
     public static int HostOrClient;
+    public static bool Hostbool = false;
+    public static bool Clientbool = false;
     //Host = 0
     //Client = 1
 
-        public void Host()
+    public void Host()
     {
+        Hostbool = true;
         HostOrClient = 0;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         
@@ -23,8 +26,12 @@ public class MainMenu : MonoBehaviour
     {
         if (SessionManager.instance.PlayersInGame < 5)
         {
-            HostOrClient = 1;
+            Debug.Log("Entered client button");
+            Clientbool = true;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            HostOrClient = 1;
+            SessionManager.Client();
+           
         }
     }
 
