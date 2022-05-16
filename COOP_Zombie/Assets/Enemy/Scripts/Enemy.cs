@@ -7,62 +7,55 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] private Vector3[] playerPositions;
 
-    public GameManager gameManager;
+    private GameManager gameManager;
+    private EnemyManager enemyManager;
+    private GameObject[] players;
+    private NavMeshAgent Agent;
+
+    private GameObject targetPlayer;
+
+    private Vector3 moveToPos = new Vector3();
+    float enemyHp;
 
     private void Start()
     {
         gameManager = GameManager.instance;
-
-        if (gameManager.playerOne.isSet == true)
-        {
-            playerPositions[0] = gameManager.playerOne.Value.position;
-            Debug.Log("hi");
-        }
-        if (gameManager.playerTwo.isSet == true)
-        {
-            playerPositions[1] = gameManager.playerTwo.Value.position;
-        }
-        if (gameManager.playerThree.isSet == true)
-        {
-            playerPositions[2] = gameManager.playerThree.Value.position;
-        }
-        if (gameManager.playerFour.isSet == true)
-        {
-            playerPositions[3] = gameManager.playerFour.Value.position;
-        }
-        if (gameManager.playerFive.isSet == true)
-        {
-            playerPositions[4] = gameManager.playerFive.Value.position;
-        }
-
-        PrintPositions();
+        enemyManager = EnemyManager.instance;
+        players = GameObject.FindGameObjectsWithTag("Player");
+        Agent = GetComponent<NavMeshAgent>();
+        //enemyHp = enemyManager.enemyMaxHealth;
+        StartCoroutine(FindClosePlayer());
     }
 
-    void PrintPositions()
+    private void Update()
     {
-        Debug.Log(playerPositions[0]);
+        Agent.destination = targetPlayer.transform.position;
     }
 
-    private Vector3 FindClosestPlayerLocation()
+    private void FindClosestPlayerLocation()
     {
         Vector3 closestPlayer = new Vector3();
         float closestDistanceSqr = Mathf.Infinity;
         Vector3 currentPosition = transform.position;
-        foreach (Vector3 potentialTarget in playerPositions)
+        //foreach (Vector3 potentialTarget in playerPositions)
+        for(int i = 0; i < players.Length; i++)
         {
-            if (potentialTarget != null)
+            Vector3 directionToTarget = players[i].transform.position - currentPosition;
+            float distanceSqrToTarget = directionToTarget.sqrMagnitude;
+            if (distanceSqrToTarget < closestDistanceSqr)
             {
-                Vector3 directionToTarget = potentialTarget - currentPosition;
-                float dSqrToTarget = directionToTarget.sqrMagnitude;
-                if (dSqrToTarget < closestDistanceSqr)
-                {
-                    closestDistanceSqr = dSqrToTarget;
-                    closestPlayer = potentialTarget;
-                }
+                closestDistanceSqr = distanceSqrToTarget;
+                closestPlayer = players[i].transform.position;
+                targetPlayer = players[i];
             }
         }
+        moveToPos = closestPlayer;
+    }
 
-        return closestPlayer;
+    IEnumerator FindClosePlayer()
+    {
+        FindClosestPlayerLocation(); 
+        yield return new WaitForSeconds(5f);
     }
 }
 
