@@ -15,7 +15,7 @@ public class PlayerController : NetworkBehaviour
     [SerializeField]
     private NetworkVariable<Vector3> move = new NetworkVariable<Vector3>();
     [SerializeField]
-    private NetworkVariable<Vector3> Rotate= new NetworkVariable<Vector3>();
+    private NetworkVariable<Vector3> Rotate = new NetworkVariable<Vector3>();
 
     //public Animator anim;
     private CharacterController controller;
@@ -23,7 +23,7 @@ public class PlayerController : NetworkBehaviour
     private bool groundedPlayer;
     private InputManager inputManager;
     private Transform cameraTransform;
-    private Vector2 initialPositionRange = new Vector2(-3, 3);
+    private Vector2 initialPositionRange = new Vector2(-2, 2);
     private Vector3 oldRotation = Vector3.zero;
     private Transform cameraRefTransform;
 
@@ -40,7 +40,7 @@ public class PlayerController : NetworkBehaviour
 
     private void Update()
     {
-        HandleRotation();
+        
         cameraRefTransform.eulerAngles = new Vector3(0f, cameraTransform.eulerAngles.y, 0f);
 
         groundedPlayer = controller.isGrounded;
@@ -50,12 +50,8 @@ public class PlayerController : NetworkBehaviour
         }
         if (IsOwner && IsClient)
         {
-            Vector2 movement = inputManager.GetPlayerMovement();
-            Vector3 direction = new Vector3(movement.x, 0f, movement.y);
-            direction = cameraRefTransform.forward * direction.z + cameraRefTransform.right.normalized * direction.x;
-            direction.y = 0f;
-            move.Value = direction; //Permite que los otros jugadores vean el movimiento
-            controller.Move(direction * Time.deltaTime * playerSpeed); 
+            HandleRotationServerRpc();
+            HandleMovementServerRpc();
         }
 
 
@@ -65,13 +61,12 @@ public class PlayerController : NetworkBehaviour
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
         }
         playerVelocity.y += gravityValue * Time.deltaTime;
+        //Makes the player Jump
         controller.Move(playerVelocity * Time.deltaTime);
     }
- 
-    void HandleRotation()
-    {
-        if (IsOwner && IsClient)
-        {
+    [ServerRpc]
+   public void HandleRotationServerRpc()
+   {
             //Gets the current rotation of the player
             Rotate.Value = this.transform.eulerAngles; 
             // Places the location of the player and it's camera into a new Vector
@@ -80,8 +75,15 @@ public class PlayerController : NetworkBehaviour
             Rotate.Value = rotationDirection; 
             //Rotates the player
             this.transform.eulerAngles = Rotate.Value; 
-        }
-
-        
+   }
+    [ServerRpc]
+    public void HandleMovementServerRpc() 
+    {
+        Vector2 movement = inputManager.GetPlayerMovement();
+        Vector3 direction = new Vector3(movement.x, 0f, movement.y);
+        direction = cameraRefTransform.forward * direction.z + cameraRefTransform.right.normalized * direction.x;
+        direction.y = 0f;
+        move.Value = direction; //Permite que los otros jugadores vean el movimiento
+        controller.Move(direction * Time.deltaTime * playerSpeed);
     }
 }

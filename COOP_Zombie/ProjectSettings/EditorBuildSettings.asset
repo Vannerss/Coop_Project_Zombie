@@ -8,7 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Main Menu.unity
     guid: c9949f81c44b3154c86b16757de2db87
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Network Test.unity
     guid: 37a5cfce35ab8c144b927c5c143106a7
+  - enabled: 1
+    path: Assets/Scenes/PreGameLobby.unity
+    guid: 6f402d197b1f78c4584e51f8c05fba3d
   m_configObjects: {}

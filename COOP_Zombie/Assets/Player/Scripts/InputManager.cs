@@ -7,6 +7,7 @@ public class InputManager : MonoBehaviour
 
     private static InputManager _instance;
     private PlayerControls playerControls;
+    
 
     public static InputManager Instance 
     {
@@ -61,6 +62,12 @@ public class InputManager : MonoBehaviour
     public bool PlayerOnClick()
     {
         return playerControls.Player.Shoot.triggered;
+    }
+
+    public bool PlayerReload() 
+    {
+        
+        return playerControls.Player.Reload.triggered;
     }
 
    

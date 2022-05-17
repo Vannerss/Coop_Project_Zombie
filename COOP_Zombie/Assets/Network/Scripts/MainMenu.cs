@@ -30,8 +30,6 @@ public class MainMenu : MonoBehaviour
             Clientbool = true;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             HostOrClient = 1;
-            SessionManager.Client();
-           
         }
     }
 
