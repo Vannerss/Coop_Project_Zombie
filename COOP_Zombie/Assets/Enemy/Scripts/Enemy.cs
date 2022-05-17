@@ -5,7 +5,6 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private Vector3[] playerPositions;
 
     private GameManager gameManager;
     private EnemyManager enemyManager;
@@ -14,22 +13,23 @@ public class Enemy : MonoBehaviour
 
     private GameObject targetPlayer;
 
-    private Vector3 moveToPos = new Vector3();
-    float enemyHp;
-
     private void Start()
     {
         gameManager = GameManager.instance;
         enemyManager = EnemyManager.instance;
         players = GameObject.FindGameObjectsWithTag("Player");
         Agent = GetComponent<NavMeshAgent>();
-        //enemyHp = enemyManager.enemyMaxHealth;
         StartCoroutine(FindClosePlayer());
     }
 
     private void Update()
     {
         Agent.destination = targetPlayer.transform.position;
+    }
+
+    private void Attack()
+    {
+
     }
 
     private void FindClosestPlayerLocation()
@@ -49,13 +49,15 @@ public class Enemy : MonoBehaviour
                 targetPlayer = players[i];
             }
         }
-        moveToPos = closestPlayer;
     }
 
     IEnumerator FindClosePlayer()
     {
-        FindClosestPlayerLocation(); 
-        yield return new WaitForSeconds(5f);
+        while (true)
+        {
+            FindClosestPlayerLocation(); 
+            yield return new WaitForSeconds(10.0f);
+        }
     }
 }
 
