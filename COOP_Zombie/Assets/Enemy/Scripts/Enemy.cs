@@ -10,26 +10,47 @@ public class Enemy : MonoBehaviour
     private EnemyManager enemyManager;
     private GameObject[] players;
     private NavMeshAgent Agent;
-
+    private Animation anim;
     private GameObject targetPlayer;
+
+    private float attackCD = 0f;
 
     private void Start()
     {
         gameManager = GameManager.instance;
         enemyManager = EnemyManager.instance;
         players = GameObject.FindGameObjectsWithTag("Player");
+        anim = GetComponent<Animation>();
         Agent = GetComponent<NavMeshAgent>();
         StartCoroutine(FindClosePlayer());
     }
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(this.transform.position, .8f);
+    }
+
     private void Update()
     {
+        if(attackCD > 0f)
+        {
+            attackCD -= Time.deltaTime;
+        }
+
         Agent.destination = targetPlayer.transform.position;
+
+        if(Vector3.Distance(this.transform.position, targetPlayer.transform.position) <= 0.8f && attackCD <= 0f)
+        {
+            Attack();
+            Debug.Log("InRange");
+        }
     }
 
     private void Attack()
     {
-
+        anim.Play("Enemy_Attack");
+        attackCD = 1.5f;
+        Debug.Log("Attacked");
     }
 
     private void FindClosestPlayerLocation()
