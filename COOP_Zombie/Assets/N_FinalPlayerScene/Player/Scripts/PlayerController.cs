@@ -22,7 +22,7 @@ public class PlayerController : NetworkBehaviour
     private Vector3 playerVelocity;
     private bool groundedPlayer;
     private InputManager inputManager;
-    private Transform cameraTransform;
+    public Transform cameraTransform;
     private Vector2 initialPositionRange = new Vector2(-2, 2);
     private Vector3 oldRotation = Vector3.zero;
     private Transform cameraRefTransform;
@@ -31,7 +31,7 @@ public class PlayerController : NetworkBehaviour
     {
         controller = GetComponent<CharacterController>();
         inputManager = InputManager.Instance;
-        cameraTransform = Camera.main.transform;
+        //cameraTransform = Camera.main.transform;
         cameraRefTransform = new GameObject().transform;
 
         if (IsOwner && IsClient)

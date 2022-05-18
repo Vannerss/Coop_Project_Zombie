@@ -15,13 +15,13 @@ public class ButtonManager : MonoBehaviour
     // private int 
 
     public static bool GameIsPaused = false;
-    public GameObject Menu;
+    //public GameObject Menu;
 
     private void Start()
     {
-        Menu.SetActive(true);
-        Time.timeScale = 0f;
-        GameIsPaused = true;
+        //Menu.SetActive(true);
+        //Time.timeScale = 0f;
+        //GameIsPaused = true;
     }
 
     private void Update()
@@ -30,11 +30,11 @@ public class ButtonManager : MonoBehaviour
         {
             if (GameIsPaused)
             {
-                Resume();
+                //Resume();
             }
             else
             {
-                Pause();
+                //Pause();
             }
         }
 
@@ -56,14 +56,14 @@ public class ButtonManager : MonoBehaviour
 
     void Resume()
     {
-        Menu.SetActive(false);
+        //Menu.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
     }
 
     void Pause()
     {
-        Menu.SetActive(true);
+        //Menu.SetActive(true);
         Time.timeScale = 0f;
         GameIsPaused = true;
     }

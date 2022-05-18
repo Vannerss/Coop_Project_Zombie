@@ -25,6 +25,7 @@ public class SessionManager : Singleton<SessionManager>
             Client();
         else
             Debug.Log("ERROR");
+        
 
         NetworkManager.Singleton.OnClientConnectedCallback += (id) =>
         {
@@ -42,7 +43,7 @@ public class SessionManager : Singleton<SessionManager>
     public void Host()
     {
         NetworkManager.Singleton.StartHost();
-        
+        playersInGame.Value = 1;
     }
 
     public static void Client()
