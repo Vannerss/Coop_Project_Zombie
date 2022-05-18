@@ -12,12 +12,14 @@ public class Gun : MonoBehaviour
    [SerializeField] private float damage = 10f;
    [SerializeField] private float range = 100f;
     public Text Ammo;
+    public Text TxtPoints;
     public GameObject reloadPrompt, MuzzleFlash;
     public Transform attackPoint;
     public int bulletsLeft = 35;
     public int magazineSize = 35;
 
-
+    private int points = 0;
+    
     
 
     private void Start()
@@ -52,7 +54,8 @@ public class Gun : MonoBehaviour
                 bulletsLeft = magazineSize;
             }
         }
-      
+
+        UpdatePoints();
        
     }
     private void UpdateUI() 
@@ -66,6 +69,11 @@ public class Gun : MonoBehaviour
         if (Physics.Raycast(cam.position, cam.forward, out hit, range))
         {
             print(hit.collider.name);
+            if(hit.collider.gameObject.tag == "Enemy")
+            {
+                hit.collider.gameObject.GetComponent<Enemy>().DamageEnemy();
+                points += 55;
+            }
         }
 
         GameObject flash = Instantiate(MuzzleFlash, attackPoint.position, Quaternion.identity);
@@ -78,5 +86,10 @@ public class Gun : MonoBehaviour
             
        
      }
+
+    private void UpdatePoints()
+    {
+        TxtPoints.text = points.ToString();
+    }
 
 }

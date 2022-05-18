@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum GameStates
 {
@@ -15,12 +16,6 @@ public class GameManager : MonoBehaviour
 
     public delegate void RoundStarted();
     public static event RoundStarted onRoundStarted;
-
-    public TransformAnchorSO playerOne = default;
-    public TransformAnchorSO playerTwo = default;
-    public TransformAnchorSO playerThree = default;
-    public TransformAnchorSO playerFour = default;
-    public TransformAnchorSO playerFive = default;
 
     private GameObject[] players;
     public int numberOfPlayers = 1;
@@ -51,7 +46,7 @@ public class GameManager : MonoBehaviour
         players = GameObject.FindGameObjectsWithTag("Player");
         numberOfPlayers = players.Length;
         UpdateGameState(GameStates.WaitRound);
-        UpdateNumberOfPlayersTransforms(numberOfPlayers);
+        //SceneManager.LoadScene("Assets/Scenes/EnvironmentLayout.unity", LoadSceneMode.Additive);
     }
 
     private void Update()
@@ -84,37 +79,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void UpdateNumberOfPlayersTransforms(int numOfPlayers)
+    private void LoadMap()
     {
-        switch (numOfPlayers)
-        {
-            case 1:
-                playerOne.Provide(players[0].transform);
-                break;
-            case 2:
-                playerOne.Provide(players[0].transform);
-                playerTwo.Provide(players[1].transform);
-                break;
-            case 3:
-                playerOne.Provide(players[0].transform);
-                playerTwo.Provide(players[1].transform);
-                playerThree.Provide(players[2].transform);
-                break;
-            case 4:
-                playerOne.Provide(players[0].transform);
-                playerTwo.Provide(players[1].transform);
-                playerThree.Provide(players[2].transform);
-                playerFour.Provide(players[3].transform);
-                break;
-            case 5:
-                playerOne.Provide(players[0].transform);
-                playerTwo.Provide(players[1].transform);
-                playerThree.Provide(players[2].transform);
-                playerFour.Provide(players[3].transform);
-                playerFive.Provide(players[4].transform);
-                break;
-        }
+        SceneManager.LoadScene("Environment Layout", LoadSceneMode.Additive);
     }
+
 
     //--EventListener--
     private void ChangeRound() //When all zombies are killed change to WaitRoundState

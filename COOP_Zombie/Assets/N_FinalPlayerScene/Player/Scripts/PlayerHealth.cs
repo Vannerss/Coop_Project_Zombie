@@ -28,14 +28,6 @@ public class PlayerHealth : MonoBehaviour
         UpdateHealthSlider();
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "Enemy") 
-        {
-            DamagePlayer(20);
-        }
-    }
-
     private void UpdateHealthSlider() 
     {
         if (CurrentHealth <= 0)
@@ -49,10 +41,10 @@ public class PlayerHealth : MonoBehaviour
     }
 
 
-    private void DamagePlayer(int damage) 
+    public void DamagePlayer() 
     {
-        CurrentHealth -= damage;
-       
+        CurrentHealth -= 20;
+        Debug.Log(this.gameObject.name + " Health: " + CurrentHealth);
         if (CurrentHealth <= 0)
         {
             CurrentHealth = 0;

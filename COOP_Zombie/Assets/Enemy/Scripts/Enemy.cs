@@ -10,19 +10,19 @@ public class Enemy : MonoBehaviour
     private EnemyManager enemyManager;
     private GameObject[] players;
     private NavMeshAgent Agent;
-    private Animation anim;
     private GameObject targetPlayer;
 
     private float attackCD = 0f;
+    private int enemyHealth;
 
     private void Start()
     {
         gameManager = GameManager.instance;
         enemyManager = EnemyManager.instance;
         players = GameObject.FindGameObjectsWithTag("Player");
-        anim = GetComponent<Animation>();
         Agent = GetComponent<NavMeshAgent>();
         StartCoroutine(FindClosePlayer());
+        enemyHealth = enemyManager.enemyMaxHealth;
     }
 
     private void OnDrawGizmos()
@@ -38,19 +38,30 @@ public class Enemy : MonoBehaviour
         }
 
         Agent.destination = targetPlayer.transform.position;
+    }
 
-        if(Vector3.Distance(this.transform.position, targetPlayer.transform.position) <= 0.8f && attackCD <= 0f)
+    public void DamageEnemy()
+    {
+        enemyHealth -= 62;
+        Debug.Log(this.gameObject.name + " health: " + enemyHealth);
+        if(enemyHealth <= 0f)
         {
-            Attack();
-            Debug.Log("InRange");
+            Die();
         }
     }
 
-    private void Attack()
+    private void Die()
     {
-        anim.Play("Enemy_Attack");
-        attackCD = 1.5f;
-        Debug.Log("Attacked");
+        Destroy(this.gameObject);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("OnTriggerEnter");
+        if(other.tag == "Player")
+        {
+            other.gameObject.GetComponent<PlayerHealth>().DamagePlayer();
+        }
     }
 
     private void FindClosestPlayerLocation()
@@ -80,12 +91,4 @@ public class Enemy : MonoBehaviour
             yield return new WaitForSeconds(10.0f);
         }
     }
-}
-
-public enum EnemyStates
-{
-    SlowWalking,
-    FastWalking,
-    Attacking,
-    Died,
 }
